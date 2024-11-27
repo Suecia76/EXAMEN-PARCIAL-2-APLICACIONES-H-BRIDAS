@@ -1,0 +1,31 @@
+body {
+  background-color: rgb(195, 195, 195);
+}
+section,
+footer {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+p,
+pre,
+ul {
+  color: black;
+}
+
+h2,
+h3,
+h4 {
+  color: black;
+}
+h1 {
+  color: #ffffff;
+  font-weight: bold;
+}
+footer ul li span {
+  font-weight: bold;
+}
+.code {
+  background-color: rgb(218, 218, 218);
+}

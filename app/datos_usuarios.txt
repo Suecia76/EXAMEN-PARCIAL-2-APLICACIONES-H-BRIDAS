@@ -1,0 +1,10 @@
+{ nombre: "Juan Pérez", email: "juan.perez@example.com", contraseña: "contraseñaSegura123" },
+  { nombre: "María García", email: "maria.garcia@example.com", contraseña: "mariaG@123" },
+  { nombre: "Carlos López", email: "carlos.lopez@example.com", contraseña: "passwordCarlos456" },
+  { nombre: "Ana Martínez", email: "ana.martinez@example.com", contraseña: "MartinezAna!789" },
+  { nombre: "Lucía Fernández", email: "lucia.fernandez@example.com", contraseña: "luciaF_pass" },
+  { nombre: "Pedro Sánchez", email: "pedro.sanchez@example.com", contraseña: "Pedrito2023" },
+  { nombre: "Laura Ramírez", email: "laura.ramirez@example.com", contraseña: "Lramirez_2023" },
+  { nombre: "Diego Torres", email: "diego.torres@example.com", contraseña: "torresDiego@pass" },
+  { nombre: "Elena González", email: "elena.gonzalez@example.com", contraseña: "EleGonPass2024" },
+  { nombre: "Roberto Castillo", email: "roberto.castillo@example.com", contraseña: "castilloRob789!" }

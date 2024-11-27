@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentación</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../public/css/estilos.css" />
+  </head>
+  <body>
+    <header>
+      <h1 class="m-3">Esta es mi API</h1>
+    </header>
+    <main class="m-4">
+      <section class="m-4 shadow">
+        <h2 class="m-2">¿Como empezar a usar la API?</h2>
+        <div class="my-2">
+          <h3 class="m-3">Registro</h3>
+          <p class="m-4">
+            Para comenzar a utilizar la API tenes que registrarte usando la ruta
+            <span class="fw-bold">localhost:3000/usuarios/registrar</span> por
+            <b>POST</b> y escribir en el body un nombre, un email y una
+            contraseña, acordate de esto porque por el momento no existe manera
+            de recuperarlos, así que recomiendo anotarlos.
+          </p>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Login</h3>
+          <p class="m-4">
+            Para comenzar a hacer consultas en la API tenes que loguearte usando
+            la ruta
+            <span class="fw-bold">localhost:3000/usuarios/login</span> por
+            <b>POST</b> y escribir en el body el email y contraseña que
+            utilizaste en tu registro, una vez registrado te daran un token,
+            este guardalo para poder hacer las peticiones, para empezar a hacer
+            peticiones que requieren autorizacion tienes que ir a la parte de
+            authorization en postman y seleccionar bearer token, luego meter el
+            token que te han dado y así podras empezar a utilizar la API con
+            todas sus funciones.
+          </p>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Obtener todos los usuarios</h3>
+          <p class="m-4">
+            Para obtener una lista completa de usuarios registrados, utiliza la
+            ruta:
+            <span class="fw-bold">localhost:3000/usuarios/</span> con el método
+            <b>GET</b>. Esta ruta requiere autenticación, por lo que debes
+            enviar un token en los headers.
+          </p>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Actualizar un usuario por su ID</h3>
+          <p class="m-4">
+            Para actualizar los detalles de un usuario, utiliza la ruta:
+            <span class="fw-bold">localhost:3000/usuarios/:id</span> con el
+            método <b>PUT</b>. Debes estar autenticado y enviar los datos
+            actualizados en el cuerpo de la petición.
+          </p>
+        </div>
+        <h3 class="m-3">Eliminar un usuario por su ID</h3>
+        <p class="m-4">
+          Para eliminar un usuario, utiliza la ruta:
+          <span class="fw-bold">localhost:3000/usuarios/:id</span> con el método
+          <b>DELETE</b>. Al igual que otras operaciones, necesitas autenticación
+          para eliminar usuarios.
+        </p>
+        <div class="my-2">
+          <h3 class="m-3">Obtener un usuario por su ID</h3>
+          <p class="m-4">
+            Para obtener un usuario específico por su ID, utiliza la ruta:
+            <span class="fw-bold">localhost:3000/usuarios/:id</span> con el
+            método <b>GET</b>. Esta ruta también requiere autenticación.
+          </p>
+        </div>
+      </section>
+      <section class="m-4 shadow">
+        <h2 class="m-2">¿Cómo usar las rutas de libros?</h2>
+        <div class="my-2">
+          <h3 class="m-3">Obtener todos los libros</h3>
+          <p class="m-4">
+            Para obtener una lista completa de todos los libros, utiliza la
+            ruta:
+            <span class="fw-bold">localhost:3000/libros/</span> con el método
+            <b>GET</b>. No necesitas autenticación para esta consulta.
+          </p>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Obtener libros con paginado</h3>
+          <p class="m-4">
+            Si quieres obtener libros en formato paginado, utiliza la ruta:
+            <span class="fw-bold">localhost:3000/libros/paginado</span> con el
+            método <b>GET</b>. Esto te permitirá consultar los libros en partes,
+            útil para grandes colecciones.
+          </p>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Buscar libros por título</h3>
+          <p class="m-4">
+            Para buscar libros por su título, utiliza la ruta:
+            <span
+              >localhost:3000/libros/buscar/nombre?nombre=El%20Principito</span
+            >
+            con el método <b>GET</b>. Asegúrate de proporcionar el nombre del
+            libro en los parámetros de consulta.
+          </p>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Crear un nuevo libro</h3>
+          <p class="m-4">
+            Para agregar un nuevo libro, utiliza la ruta:
+            <span class="fw-bold">localhost:3000/libros/</span> con el método
+            <b>POST</b>. Debes estar autenticado, así que asegúrate de enviar el
+            token de autorización en los headers como <b>Bearer token</b>.
+            Ejemplo del cuerpo (body) de la petición:
+          </p>
+          <div class="code">
+            <pre class="m-4"><code>
+{
+  "titulo": "El nuevo libro",
+  "autor": "Juan Pérez",
+  "genero": "Ficción",
+  "anio_publicacion": 2024
+}
+        </code></pre>
+          </div>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Buscar libros por género</h3>
+          <p class="m-4">
+            Si deseas buscar libros por género, usa la ruta:
+            <span class="fw-bold">localhost:3000/libros/buscar/genero</span> con
+            el método <b>POST</b>. Debes incluir el género en el cuerpo (body)
+            de la petición, de la siguiente forma:
+          </p>
+          <div class="code">
+            <pre class="m-4"><code>
+{
+  "genero": "Ciencia ficción"
+}
+        </code></pre>
+          </div>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Obtener un libro por ID</h3>
+          <p class="m-4">
+            Para obtener un libro específico por su ID, utiliza la ruta:
+            <span class="fw-bold">localhost:3000/libros/:id</span> con el método
+            <b>GET</b>. Solo necesitas reemplazar <i>:id</i> por el ID real del
+            libro que deseas consultar.
+          </p>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Actualizar un libro por ID</h3>
+          <p class="m-4">
+            Para actualizar los detalles de un libro específico, utiliza la
+            ruta:
+            <span class="fw-bold">localhost:3000/libros/:id</span> con el método
+            <b>PUT</b>. Al igual que para crear un libro, debes estar
+            autenticado (token de autorización). En el cuerpo de la petición,
+            proporciona los nuevos datos del libro que deseas actualizar.
+          </p>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Eliminar un libro por ID</h3>
+          <p class="m-4">
+            Para eliminar un libro por su ID, utiliza la ruta:
+            <span class="fw-bold">localhost:3000/libros/:id</span> con el método
+            <b>DELETE</b>. Recuerda que necesitas autenticación para esta
+            operación.
+          </p>
+        </div>
+      </section>
+      <section class="m-4 shadow">
+        <h2 class="m-2">¿Cómo usar las rutas de autores?</h2>
+        <div class="my-2">
+          <h3 class="m-3">Obtener todos los autores</h3>
+          <p class="m-4">
+            Para obtener una lista completa de todos los autores, utiliza la
+            ruta:
+            <span class="fw-bold">localhost:3000/autores/</span> con el método
+            <b>GET</b>. No necesitas autenticación para esta consulta.
+          </p>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Crear un nuevo autor</h3>
+          <p class="m-4">
+            Para agregar un nuevo autor, utiliza la ruta:
+            <span class="fw-bold">localhost:3000/autores/</span> con el método
+            <b>POST</b>. Debes estar autenticado, así que asegúrate de enviar el
+            token de autorización en los headers como <b>Bearer token</b>.
+            Ejemplo del cuerpo (body) de la petición:
+          </p>
+          <div class="code">
+            <pre class="m-4"><code>
+{
+  "nombre": "Gabriel García Márquez",
+  "nacionalidad": "Colombiana",
+  "libros": ["Cien años de soledad", "El amor en los tiempos del cólera"]
+}
+        </code></pre>
+          </div>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Buscar autores por nombre</h3>
+          <p class="m-4">
+            Para buscar autores por su nombre, utiliza la ruta:
+            <span class="fw-bold"
+              >localhost:3000/autores/buscar/nombre?nombre=Gabriel</span
+            >
+            con el método <b>GET</b>. Asegúrate de proporcionar el nombre del
+            autor en los parámetros de consulta.
+          </p>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Actualizar un autor por ID</h3>
+          <p class="m-4">
+            Para actualizar los detalles de un autor específico, utiliza la
+            ruta:
+            <span class="fw-bold">localhost:3000/autores/:id</span> con el
+            método <b>PUT</b>. Al igual que para crear un autor, necesitas estar
+            autenticado. En el cuerpo de la petición, proporciona los nuevos
+            datos del autor que deseas actualizar.
+          </p>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Eliminar un autor por ID</h3>
+          <p class="m-4">
+            Para eliminar un autor por su ID, utiliza la ruta:
+            <span class="fw-bold">localhost:3000/autores/:id</span> con el
+            método <b>DELETE</b>. Recuerda que necesitas autenticación para esta
+            operación.
+          </p>
+        </div>
+        <div class="my-2">
+          <h3 class="m-3">Obtener un autor por ID</h3>
+          <p class="m-4">
+            Para obtener un autor específico por su ID, utiliza la ruta:
+            <span class="fw-bold">localhost:3000/autores/:id</span> con el
+            método <b>GET</b>. Solo necesitas reemplazar <i>:id</i> por el ID
+            real del autor que deseas consultar.
+          </p>
+        </div>
+      </section>
+    </main>
+    <footer class="m-4">
+      <h2 class="m-3">Datos:</h2>
+      <ul class="m-3">
+        <li><span>Nombre y Apellido:</span> Santiago Carrasco</li>
+        <li><span>Materia:</span> Aplicaciones Híbridas</li>
+        <li><span>Docente:</span> Marcos Galbán Camila Belén</li>
+        <li><span>Comisión:</span> DWN4AV</li>
+      </ul>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-n00T0IOJcDJcHrPfpPqR1Yf/DFMg3PO2J6O6clNGsb8I9h1zwp3vM0D0OWM/hfPZ"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

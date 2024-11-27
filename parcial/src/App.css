@@ -1,0 +1,125 @@
+:root {
+  --blue: #09f;
+  --blue-lighter: color-mix(in srgb, var(--blue), white 75%);
+  --blue-light: color-mix(in srgb, var(--blue), white);
+  --blue-dark: color-mix(in srgb, var(--blue), black 25%);
+  --blue-darker: color-mix(in srgb, var(--blue), black);
+}
+body {
+  background-image: url(./assets/imagenes/fondo.jpg);
+}
+main {
+  background-color: rgb(254, 248, 229);
+  width: 85%;
+  margin: auto;
+  padding-bottom: 5%;
+}
+.color-fondo {
+  background-color: rgb(254, 248, 229);
+}
+.blue {
+  background: var(--blue);
+}
+
+.blue-lighter {
+  background: color-mix(in srgb, var(--blue), white 75%);
+}
+
+.blue-light {
+  background: color-mix(in srgb, var(--blue), white);
+}
+
+.blue-dark {
+  background: color-mix(in srgb, var(--blue), black 25%);
+}
+
+.blue-darker {
+  background: color-mix(in srgb, var(--blue), black);
+}
+.btn-secondary {
+  background-color: white;
+  border: 2px var(--blue) solid;
+  color: var(--blue);
+  border-radius: 10px;
+}
+.btn-secondary:hover {
+  background-color: var(--blue);
+  border: 2px var(--blue) solid;
+  color: white;
+  border-radius: 10px;
+}
+.botones {
+  background-color: rgb(186, 133, 17);
+  color: white;
+}
+button.botones:hover,
+a.botones:hover {
+  background-color: rgb(135, 92, 0);
+}
+button.botones:disabled {
+  color: rgb(0, 0, 0);
+  cursor: not-allowed;
+}
+.crear {
+  background-color: rgba(255, 231, 154, 0.754);
+}
+.section {
+  ul li {
+    border-radius: 10px;
+    margin: 5px 0;
+  }
+  ul li a {
+    font-size: 1.3rem;
+  }
+
+  ul li .btn-warning {
+    background-color: var(--blue-dark);
+    color: white;
+    border: none;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 8px;
+    transition: 1.1s;
+  }
+  ul li:hover .btn-warning {
+    background-color: white;
+    color: var(--blue-darker);
+    border: 2px solid var(--blue-dark);
+    padding: 8px;
+    transition: 1.1s;
+  }
+  ul li .btn-warning:hover {
+    background-color: var(--blue-lighter);
+    transition: 1.1s;
+  }
+  ul li .btn-danger {
+    background-color: rgb(237, 40, 40);
+    color: white;
+    border: none;
+    padding: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: 1.1s;
+  }
+
+  ul li .btn-danger:hover {
+    background-color: rgb(158, 26, 26);
+    color: white;
+    transition: 1.1s;
+  }
+  ul li:hover .btn-danger {
+    border: 2px solid white;
+    transition: 1.1s;
+  }
+  ul li:hover {
+    filter: drop-shadow();
+    background-color: rgba(186, 132, 17, 0.805);
+    color: white;
+    transition: 1.5s;
+  }
+  ul li:hover a {
+    color: white !important;
+    transition: 1.1s;
+  }
+}

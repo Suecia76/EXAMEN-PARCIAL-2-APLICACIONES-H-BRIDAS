@@ -98,7 +98,7 @@ const loginUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const userId = req.params.id;
-  const { nombre, email, contraseña } = req.body;
+  const { nombre, email, contraseña, rol } = req.body; // Añadido 'rol'
 
   try {
     const user = await Usuario.findById(userId);
@@ -113,10 +113,19 @@ const updateUser = async (req, res) => {
       user.contraseña = await bcrypt.hash(contraseña, 10);
     }
 
+    // Valida y actualiza el rol si está presente
+    if (rol) {
+      const validRoles = ["comun", "editor", "admin"]; // Lista de roles permitidos
+      if (!validRoles.includes(rol)) {
+        return res.status(400).json({ message: "Rol no válido" });
+      }
+      user.rol = rol;
+    }
+
     await user.save();
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ message: "Error al actualizar el usuario" });
+    res.status(500).json({ message: "Error al actualizar el usuario", error });
   }
 };
 

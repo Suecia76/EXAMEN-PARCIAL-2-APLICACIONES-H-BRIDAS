@@ -29,10 +29,21 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const url = process.env.DB_URL;
+
 mongoose
-  .connect(process.env.MONGODB_URL)
-  .then(() => console.log("Conectado a MongoDB"))
-  .catch((err) => console.error("Error conectando a MongoDB:", err));
+  .connect(url)
+  .then(() => {
+    console.log("Conexión con Mongo exitosa!");
+  })
+  .catch((err) => {
+    console.error("Error al conectar a MongoDB:", err);
+  });
+
+// mongoose
+//   .connect(process.env.MONGODB_URL)
+//   .then(() => console.log("Conectado a MongoDB"))
+//   .catch((err) => console.error("Error conectando a MongoDB:", err));
 
 // Rutas
 app.use("/libros", libros_router);

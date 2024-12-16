@@ -9,6 +9,7 @@ const NavBar = () => {
   const { user, logout } = useContext(UserContext); // Accede al contexto
   const navigate = useNavigate();
   const token = Cookies.get("token") || null;
+
   const handleLogout = () => {
     logout(); // Llama a la función de logout proporcionada por el contexto
     navigate("/"); // Redirige al usuario a la página de inicio o login
@@ -48,6 +49,17 @@ const NavBar = () => {
               </li>
             ) : (
               <>
+                {/* Mostrar "Panel de administración" solo si el usuario es admin */}
+                {user.rol === "admin" && (
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link text-white"
+                      to={"/admin_panel"}
+                    >
+                      Panel de Administración
+                    </NavLink>
+                  </li>
+                )}
                 <li className="nav-item">
                   <button
                     className="nav-link btn text-white"

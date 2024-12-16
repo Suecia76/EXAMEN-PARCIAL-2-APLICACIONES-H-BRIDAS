@@ -7,15 +7,8 @@ import { UserContext } from "../../context/UserContext";
 
 const Autores = () => {
   const [autores, setAutores] = useState([]);
-  const [formulario, setFormulario] = useState({
-    nombre: "",
-    edad: "",
-    libros: "",
-  });
   const [search, setSearch] = useState("");
-  const [autorEditando, setAutorEditando] = useState(null);
-  const [suggestions, setSuggestions] = useState([]);
-
+  const [autorEliminando, setAutorEliminando] = useState(null);
   const debouncedSearch = useDebounce(search, 1000);
   const { user } = useContext(UserContext);
 
@@ -43,74 +36,19 @@ const Autores = () => {
   useEffect(() => {
     if (debouncedSearch) {
       buscarAutores(debouncedSearch);
-    } else {
-      setSuggestions([]);
     }
   }, [debouncedSearch]);
 
-  // Función para manejar cambios en el formulario
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormulario({ ...formulario, [name]: value });
-  };
-
-  // Crear o editar autor
-  const manejarFormulario = async (e) => {
-    e.preventDefault();
-    const { nombre, edad, libros } = formulario;
-    const autorData = {
-      nombre,
-      edad: parseInt(edad),
-      libros: libros.split(",").map((libro) => libro.trim()),
-    };
-
-    try {
-      if (autorEditando) {
-        const response = await axios.put(
-          `http://localhost:3000/autores/${autorEditando._id}`,
-          autorData,
-          { headers: getAuthHeaders() }
-        );
-        setAutores((prev) =>
-          prev.map((autor) =>
-            autor._id === autorEditando._id ? response.data : autor
-          )
-        );
-        setAutorEditando(null);
-      } else {
-        const response = await axios.post(
-          "http://localhost:3000/autores",
-          autorData,
-          {
-            headers: getAuthHeaders(),
-          }
-        );
-        setAutores((prev) => [...prev, response.data]);
-      }
-      setFormulario({ nombre: "", edad: "", libros: "" });
-    } catch (error) {
-      console.error("Error al manejar autor:", error);
-    }
-  };
-
-  // Buscar autores
   const buscarAutores = async (nombre) => {
     try {
       const response = await axios.get("http://localhost:3000/autores/buscar", {
         params: { nombre },
       });
-      setSuggestions([]);
       setAutores(response.data.autores || []);
     } catch (error) {
       console.error("Error al buscar autores:", error);
       setAutores([]);
     }
-  };
-
-  // Manejar clic en sugerencias
-  const manejarClicSugerencia = (nombre) => {
-    setSearch(nombre);
-    buscarAutores(nombre);
   };
 
   // Eliminar autor
@@ -120,19 +58,10 @@ const Autores = () => {
         headers: getAuthHeaders(),
       });
       setAutores((prev) => prev.filter((autor) => autor._id !== id));
+      setAutorEliminando(null);
     } catch (error) {
       console.error("Error al eliminar autor:", error);
     }
-  };
-
-  // Editar autor
-  const editarAutor = (autor) => {
-    setFormulario({
-      nombre: autor.nombre,
-      edad: autor.edad.toString(),
-      libros: autor.libros.join(", "),
-    });
-    setAutorEditando(autor);
   };
 
   return (
@@ -140,34 +69,11 @@ const Autores = () => {
       <h1 className="mb-4 text-center">Gestión de Autores</h1>
 
       {Cookies.get("token") && (
-        <form
-          onSubmit={manejarFormulario}
-          className="mb-4 shadow p-3 rounded w-75 mx-auto"
-        >
-          <legend className="fw-bold">
-            {autorEditando ? "Editar Autor" : "Crear Autor"}
-          </legend>
-          {["nombre", "edad", "libros"].map((campo) => (
-            <div key={campo} className="mb-3 w-75 mx-auto">
-              <label className="fw-bold w-100 my-2">
-                {campo.charAt(0).toUpperCase() + campo.slice(1)}:
-                <input
-                  type="text"
-                  name={campo}
-                  className="form-control"
-                  value={formulario[campo]}
-                  onChange={handleInputChange}
-                  placeholder={`Ingrese ${campo}`}
-                />
-              </label>
-            </div>
-          ))}
-          <div className="d-flex justify-content-end">
-            <button className="btn btn-primary" type="submit">
-              {autorEditando ? "Actualizar Autor" : "Agregar Autor"}
-            </button>
-          </div>
-        </form>
+        <div className="mb-4">
+          <Link to="/autores/crear" className="btn btn-primary">
+            Crear Autor
+          </Link>
+        </div>
       )}
 
       <form className="my-4 w-75 mx-auto">
@@ -181,19 +87,6 @@ const Autores = () => {
             placeholder="Buscar por nombre"
           />
         </div>
-        {suggestions.length > 0 && (
-          <ul className="list-group mt-2">
-            {suggestions.map((sug) => (
-              <li
-                key={sug._id}
-                className="list-group-item"
-                onClick={() => manejarClicSugerencia(sug.nombre)}
-              >
-                {sug.nombre}
-              </li>
-            ))}
-          </ul>
-        )}
       </form>
 
       <section className="section">
@@ -204,21 +97,26 @@ const Autores = () => {
               key={autor._id}
               className="list-group-item d-flex justify-content-between"
             >
-              <Link to={`/autores/${autor._id}`} className="fw-bold">
+              <Link
+                to={`/autores/${autor._id}`}
+                className="link-offset-2 link-underline link-underline-opacity-0 text-black fw-bold"
+              >
                 {autor.nombre}
               </Link>
               {(user?.rol === "admin" || user?.rol === "editor") && (
                 <div>
-                  <button
+                  <Link
+                    to={`/autores/editar/${autor._id}`}
                     className="btn btn-warning btn-sm me-2"
-                    onClick={() => editarAutor(autor)}
                   >
                     Editar
-                  </button>
+                  </Link>
                   {user?.rol === "admin" && (
                     <button
                       className="btn btn-danger btn-sm"
-                      onClick={() => eliminarAutor(autor._id)}
+                      onClick={() => setAutorEliminando(autor)}
+                      data-bs-toggle="modal"
+                      data-bs-target="#confirmarEliminarModal"
                     >
                       Eliminar
                     </button>
@@ -229,6 +127,52 @@ const Autores = () => {
           ))}
         </ul>
       </section>
+
+      {/* Modal para Confirmar Eliminación */}
+      <div
+        className="modal fade"
+        id="confirmarEliminarModal"
+        tabIndex="-1"
+        aria-labelledby="confirmarEliminarModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="confirmarEliminarModalLabel">
+                Confirmar Eliminación
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              ¿Estás seguro de que deseas eliminar al autor{" "}
+              <strong>{autorEliminando?.nombre}</strong>?
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() => eliminarAutor(autorEliminando._id)}
+                data-bs-dismiss="modal"
+              >
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

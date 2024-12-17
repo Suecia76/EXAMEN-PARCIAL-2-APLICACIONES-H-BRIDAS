@@ -25,7 +25,6 @@ app.listen(PORT, () => {
 });
 
 app.use(express.json());
-const cors = require("cors");
 const corsOptions = {
   origin: ["https://examen-parcial-2-aplicaciones-h-bridas.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE"],

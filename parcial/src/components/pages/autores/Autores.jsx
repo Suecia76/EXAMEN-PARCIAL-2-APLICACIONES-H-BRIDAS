@@ -21,9 +21,12 @@ const Autores = () => {
   useEffect(() => {
     const fetchAutores = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/autores", {
-          headers: getAuthHeaders(),
-        });
+        const response = await axios.get(
+          "https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/autores",
+          {
+            headers: getAuthHeaders(),
+          }
+        );
         setAutores(response.data);
       } catch (error) {
         console.error("Error al obtener autores:", error);
@@ -41,9 +44,12 @@ const Autores = () => {
 
   const buscarAutores = async (nombre) => {
     try {
-      const response = await axios.get("http://localhost:3000/autores/buscar", {
-        params: { nombre },
-      });
+      const response = await axios.get(
+        "https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/autores/buscar",
+        {
+          params: { nombre },
+        }
+      );
       setAutores(response.data.autores || []);
     } catch (error) {
       console.error("Error al buscar autores:", error);
@@ -54,9 +60,12 @@ const Autores = () => {
   // Eliminar autor
   const eliminarAutor = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/autores/${id}`, {
-        headers: getAuthHeaders(),
-      });
+      await axios.delete(
+        `https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/autores/${id}`,
+        {
+          headers: getAuthHeaders(),
+        }
+      );
       setAutores((prev) => prev.filter((autor) => autor._id !== id));
       setAutorEliminando(null);
     } catch (error) {

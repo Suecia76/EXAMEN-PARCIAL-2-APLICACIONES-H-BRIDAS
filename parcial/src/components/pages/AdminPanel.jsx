@@ -16,11 +16,14 @@ const AdminPanel = () => {
       }
 
       try {
-        const response = await axios.get("http://localhost:3000/usuarios", {
-          headers: {
-            Authorization: `Bearer ${token}`, // Usa el token de las cookies
-          },
-        });
+        const response = await axios.get(
+          "https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/usuarios",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Usa el token de las cookies
+            },
+          }
+        );
         const filteredUsers = response.data.filter(
           (user) => user.rol !== "admin"
         ); // Filtra administradores
@@ -44,7 +47,7 @@ const AdminPanel = () => {
 
     try {
       await axios.put(
-        `http://localhost:3000/usuarios/${userId}`,
+        `https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/usuarios/${userId}`,
         { rol: newRole },
         {
           headers: {

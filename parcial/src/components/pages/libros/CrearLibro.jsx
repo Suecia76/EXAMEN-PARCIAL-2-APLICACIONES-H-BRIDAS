@@ -33,11 +33,15 @@ const CrearLibro = () => {
     const token = Cookies.get("token") || null;
 
     try {
-      await axios.post("http://localhost:3000/libros", data, {
-        headers: {
-          Authorization: token ? `Bearer ${token}` : "",
-        },
-      });
+      await axios.post(
+        "https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/libros",
+        data,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
 
       // Función onSuccess definida localmente
       navigate("/"); // Redirige a la lista de libros después de agregar el libro

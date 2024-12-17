@@ -20,9 +20,12 @@ const AutorDetalle = () => {
 
   const obtenerAutor = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/autores/${id}`, {
-        headers: getAuthHeaders(),
-      });
+      const response = await axios.get(
+        `https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/autores/${id}`,
+        {
+          headers: getAuthHeaders(),
+        }
+      );
       setAutor(response.data);
     } catch (error) {
       console.error("Error al obtener el autor:", error);

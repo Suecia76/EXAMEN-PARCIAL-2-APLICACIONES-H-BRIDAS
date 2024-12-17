@@ -51,7 +51,7 @@ const Libros = () => {
   const handleSearch = async (searchTerm) => {
     try {
       const res = await axios.get(
-        "http://localhost:3000/libros/buscar/nombre",
+        "https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/libros/buscar/nombre",
         {
           params: {
             titulo: searchTerm,
@@ -71,11 +71,14 @@ const Libros = () => {
     const token = Cookies.get("token") || null;
 
     try {
-      await axios.delete(`http://localhost:3000/libros/${libroIdToDelete}`, {
-        headers: {
-          Authorization: token ? `Bearer ${token}` : "",
-        },
-      });
+      await axios.delete(
+        `https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/libros/${libroIdToDelete}`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
       ver_libros(); // Actualizar la lista de libros
       setShowModal(false); // Cerrar el modal
     } catch (error) {

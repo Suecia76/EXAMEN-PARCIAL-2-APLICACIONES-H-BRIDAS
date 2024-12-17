@@ -35,7 +35,9 @@ const EditarLibro = () => {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:3000/libros/${id}`)
+        .get(
+          `https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/libros/${id}`
+        )
         .then((response) => {
           setLibroEditando(response.data);
         })
@@ -58,7 +60,7 @@ const EditarLibro = () => {
 
     try {
       await axios.put(
-        `http://localhost:3000/libros/${libroEditando._id}`,
+        `https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/libros/${libroEditando._id}`,
         data,
         {
           headers: {

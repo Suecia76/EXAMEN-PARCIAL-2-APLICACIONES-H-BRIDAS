@@ -73,7 +73,7 @@ const CrearAutor = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:3000/autores",
+        "https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/autores",
         datos,
         {
           headers: {

@@ -18,7 +18,9 @@ const EditarAutor = () => {
   useEffect(() => {
     if (id) {
       axios
-        .get(`http://localhost:3000/autores/${id}`)
+        .get(
+          `https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/autores/${id}`
+        )
         .then((response) => {
           const autor = response.data;
           setFormulario({
@@ -86,7 +88,7 @@ const EditarAutor = () => {
       };
 
       const response = await axios.put(
-        `http://localhost:3000/autores/${id}`,
+        `https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/autores/${id}`,
         datos,
         {
           headers: {

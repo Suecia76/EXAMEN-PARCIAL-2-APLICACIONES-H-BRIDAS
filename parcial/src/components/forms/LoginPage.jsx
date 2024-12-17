@@ -32,7 +32,7 @@ const LoginUsuario = () => {
     try {
       // Petición al backend
       const response = await axios.post(
-        "http://localhost:3000/usuarios/login",
+        "https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/usuarios/login",
         data
       );
 

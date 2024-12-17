@@ -42,7 +42,7 @@ const RegistroUsuario = () => {
       const datosConRol = { ...data, rol: "usuario comun" };
       console.log("Datos enviados:", datosConRol);
       const response = await axios.post(
-        "http://localhost:3000/usuarios/registrar",
+        "https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/usuarios/registrar",
         datosConRol
       );
 

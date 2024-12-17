@@ -10,7 +10,7 @@ const EliminarLibro = ({ libroId, onConfirm, onCancel }) => {
     const fetchLibro = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/libros/${libroId}`
+          `https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/libros/${libroId}`
         );
         setLibro(response.data);
       } catch (error) {
@@ -27,11 +27,14 @@ const EliminarLibro = ({ libroId, onConfirm, onCancel }) => {
   const handleDelete = async () => {
     const token = Cookies.get("token") || null;
     try {
-      await axios.delete(`http://localhost:3000/libros/${libroId}`, {
-        headers: {
-          Authorization: token ? `Bearer ${token}` : "",
-        },
-      });
+      await axios.delete(
+        `https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/libros/${libroId}`,
+        {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        }
+      );
       onConfirm(); // Llamar la función de confirmación
     } catch (error) {
       console.error("Error al eliminar el libro:", error);

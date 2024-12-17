@@ -18,15 +18,18 @@ const LibroView = () => {
   const libro_detalles = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`http://localhost:3000/libros/${id}`, {
-        params: {
-          name: search,
-          status: filterStatus,
-          sortBy: sort,
-          page,
-          limit,
-        },
-      });
+      const res = await axios.get(
+        `https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/libros/${id}`,
+        {
+          params: {
+            name: search,
+            status: filterStatus,
+            sortBy: sort,
+            page,
+            limit,
+          },
+        }
+      );
       setLibro(res.data);
       setLoading(false);
     } catch (err) {

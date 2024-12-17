@@ -24,7 +24,7 @@ const Libros = () => {
   const ver_libros = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/libros/paginado?pagina=${page}&limite=${limit}`
+        `https://examen-parcial-2-aplicaciones-h-bridas-1.onrender.com/libros/paginado?pagina=${page}&limite=${limit}`
       );
       setLibros(Array.isArray(res.data.libros) ? res.data.libros : []);
       setTotalPaginas(res.data.numero_paginas); // Total de páginas
